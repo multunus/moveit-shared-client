@@ -90,7 +90,8 @@
                      data: JSON.stringify(data),
                      success: function(data, textStatus, jqXHR) {
                          enableSaveButtonWith(form, 'DONE');
-                         window.location = "leaderboard.html?show-modal=true"
+                         localStorage['lastContribution'] = data.amount;
+                         window.location = "leaderboard.html"
                      },
                      error: function() {
                          alert("Oops !! Something went wrong")
