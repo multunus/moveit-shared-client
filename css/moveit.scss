@@ -8,7 +8,6 @@ input{
     background-color: transparent !important;
 }
 
-
 body {
     
     .hidden{
@@ -92,7 +91,12 @@ body {
     }
     .leaderboard{
         margin-bottom: 0px;
+        padding-left: 0px;
+        .row{
+            margin-left: -0.15em;
+        }
         .collection{
+            padding-left: 4px;
             a{
                 color: rgba(0, 0, 0, 1);
                 &:visited{
@@ -105,7 +109,20 @@ body {
                     color: rgba(0, 0, 0, 1);
                 }
             }
-            padding-left: 4px;
+
+            .indicator{
+                &.user-active{
+                    border-left: 5px;
+                    border-left-style: solid;
+                    border-left-color: $button-color;  
+                }
+                &.user-inactive{
+                    border-left: 5px;
+                    border-left-style: solid;
+                     border-left-color: $moveit-primary-color;
+                }
+            }
+            
             .highlight{
                 background-color: rgb(249, 244, 224);
             }
@@ -114,6 +131,11 @@ body {
                 &.avatar{
                     padding-left: 52px;   
                 }
+
+                .highlight{
+                    background-color: rgb(249, 244, 224);
+                }
+                
                 .item-content{
                     margin-top: 6px;
                     margin-left: 10px;
@@ -142,31 +164,31 @@ body {
                 
             }
         }
-      .modal {
-        .modal-header {
-          background: $moveit-secondary-color;
-          height: 80px;
-          h5 {
-            width: 100%;
-          }
-        }
-        .amount {
-            margin: 5% 0;
-            font-size: 5em;
-            .help-text {
-              display: block;
-              font-size: 0.5em;
-              margin-top: -10px;
+        .modal {
+            .modal-header {
+                background: $moveit-secondary-color;
+                height: 80px;
+                h5 {
+                    width: 100%;
+                }
+            }
+            .amount {
+                margin: 5% 0;
+                font-size: 5em;
+                .help-text {
+                    display: block;
+                    font-size: 0.5em;
+                    margin-top: -10px;
+                }
+            }
+            .modal-button{
+                margin: 20px;
             }
         }
-       .modal-button{
-          margin: 20px;
-       }
-      }
     }
     .user-profile{
         .hero-container{
-            position:relative;
+            position: relative;
             .foreground{
                 background: url('../img/profile_background02.jpg');
                 height:300px;

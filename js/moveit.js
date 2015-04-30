@@ -22,3 +22,42 @@ var getParameterByName = function(name, location) {
       results = regex.exec(location.search);
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
+
+
+var UserInteraction =
+      {
+        bump: function(from_user_email, to_user_email, drag_section){
+          var data = {
+            from_email_id : from_user_email,
+            to_email_id : to_user_email
+          };
+
+          drag_section.animate({
+            left: '+=400px'
+          }, 250);
+          
+          drag_section.siblings('.interaction-message.bump').removeClass('hidden');
+          drag_section.hide();
+          $.ajax({
+            dataType: 'json',
+            url: settings.getSetting("apiUrl") + 'user/bump',
+            type: 'POST',
+            data: data,
+            success: function(data, textStatus, jqXHR) {
+              drag_section.show();
+              drag_section.animate({
+                left: '-=400px'
+              }, 250);
+              drag_section.siblings('.interaction-message.bump').addClass('hidden');
+            },
+            error: function() {
+              alert("failed");
+            },
+            timeout: 30000
+          });
+        },
+
+        nudge: function(from_user_email, to_user_email){
+
+        }
+      };

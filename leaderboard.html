@@ -103,7 +103,8 @@
                     
                 </ul>
             </div>
-            <div id="leader-board-modal" class="modal"></div>
+            <div id="leader-board-modal" class="modal">
+            </div>
         </div>
         <div class="bottom-spacing">
         </div>
@@ -125,6 +126,35 @@
                 <button class="btn btn-primary save-btn col s12 modal-action modal-close">I Feel Gooood!</button>
               </div>
         </script>
+        <script type="text/template" id="user-details-template">
+            <div class="drag-items">
+                <li class="collection-item row hidden interaction-message bump">
+                    Bumping
+                </li>
+                <li class="collection-item row hidden interaction-message nudge">
+                    Nudging
+                </li>
+                <li class="collection-item avatar row <%= css_class %> draggable-section indicator user-inactive" data-email="<%= email %>">
+                    <a href="user_profile.html?email=<%= email %>">
+                        <span class=" col s3"><img src="<%= gravatar %>" alt="" class="circle"></span>
+                        <span class="item-content">
+                            <span class="count s2 col">#<%= index %></span>
+                            <span class="title col s6"> <%= title_text %> </span>
+                            <span class="col s4 amount-section">
+                                <div class="amount right-align">
+                                    <span class="symbol">&#8377</span>
+                                    <%= amount %>
+                                </div>
+                                <div class="duration right-align">
+                                    <%= duration %>mins
+                                </div>
+                            </span>
+                        </span>
+                    </a>
+                </li>
+            </div>
+        </script>
+        
         <script src="js/jquery-2.1.1.min.js"></script>
         <script src="js/jquery-count-to.js"></script>
         <script src="js/jquery-url-params.js"></script>
@@ -133,10 +163,15 @@
         <script src="js/moment.min.js"></script>
         <script src="js/globalize.min.js"></script>
         <script src="js/globalize.culture.as-IN.min.js"></script>
+        <script src="js/hammer.min.js"></script>
+        <script src="js/jquery.hammer.js"></script>
         <script src="js/moveit.js"></script>
         <script src="js/settings.js"></script>
+        
 
         <script>
+         window.total_amount = 0;
+         
          function enableTestMode(){
              var settings = JSON.parse(localStorage.getItem("settings")) || {};
              if(settings.mode === "test"){
@@ -150,6 +185,40 @@
              $("#leader-board-modal").openModal();
              $("#leader-board-modal .value").countTo({
                  to: lastContribution
+             });
+         }
+
+         function fillUserDetails(data){
+             
+             var title_text = '';
+             var css_class = '';
+             _.each(data.leaderboard, function(userDetails, index){
+                 if(userDetails.email === localStorage["userEmail"]){
+                     title_text = 'YOU';
+                     css_class = 'highlight';
+                     if(localStorage['lastContribution']){
+                         showModalFor(userDetails, localStorage['lastContribution']);
+                         localStorage.removeItem('lastContribution');
+                     }
+                 }else{
+                     title_text = userDetails.name;
+                     css_class = '';
+                 }
+
+                 var userTemplate = $("#user-details-template").html();
+                 var templateData = {
+                     "css_class": css_class,
+                     "index": index + 1,
+                     "gravatar" : userDetails.gravatar,
+                     "title_text" : title_text,
+                     "amount": Globalize.format(userDetails.amount),
+                     "duration": userDetails.duration,
+                     "email": userDetails.email
+                 };
+                 window.total_amount += userDetails.amount;
+                 $(".user_name").text(userDetails.name);
+                 var processedTemplate = _.template(userTemplate);
+                 $('.leaderboard > .row > .collection').append(processedTemplate(templateData));
              });
          }
          
@@ -167,44 +236,44 @@
                  month: current_month
              }
              
-             var total_amount = 0;
-             var title_text = '';
-             var css_class = '';
+             
              $.ajax({
                  dataType: 'json',
                  url: settings.getSetting("apiUrl") + 'leaderboard',
                  type: 'GET',
                  data: data,
                  success: function(data, textStatus, jqXHR) {
-                     console.log(data);
-                     _.each(data.leaderboard, function(entry, index){
-                         if(entry.email === localStorage["userEmail"]){
-                             title_text = 'YOU';
-                             css_class = 'highlight';
-                             if(localStorage['lastContribution']){
-                                 showModalFor(entry, localStorage['lastContribution']);
-                                 localStorage.removeItem('lastContribution');
-                             }
-                         }else{
-                             title_text = entry.name;
-                             css_class = '';
-                         }
-                         entryHTML = '<li class="collection-item avatar row ' + css_class +'"><a href="user_profile.html?email=' + entry.email + '"><span class=" col s3"><img src="' + entry.gravatar  +'" alt="" class="circle"></span><span class="item-content"><span class="count s2 col">#' + (index + 1) +'</span><span class="title col s6">' + title_text + '</span><span class="col s4 amount-section"><div class="amount right-align"><span class="symbol">&#8377</span>' + Globalize.format(entry.amount) + '</div><div class="duration right-align">' + entry.duration + 'mins</div></span></span></A></li>';
-                         $('.leaderboard > .row > .collection').append(entryHTML);
-                         total_amount += entry.amount;
-                     });
+                     fillUserDetails(data);
                      $(".loading-throbber").hide();
-                     $('.total-amount > .value').html(Globalize.format(total_amount));
+                     $('.total-amount > .value').html(Globalize.format(window.total_amount));
                      $('.goal-section > .goal').text(Globalize.format(data.monthly_goal));
-                     Materialize.showStaggeredList('.collection')
+                     Materialize.showStaggeredList('.collection');
+                     setupSwipeGesture();
                  },
                  error: function() {
                      $(".loading-throbber").hide();
                      alert('Opps Something Went Wrong!');
                  },
-                 timeout: 30000
+                 timeout: 300000
              });
          });
+
+         function setupSwipeGesture(){
+             var options = {
+                 dragLockToAxis: true,
+                 dragBlockHorizontal: true
+             }; 
+             
+             $('.draggable-section').each(function(index, element){
+                 Hammer(element).on("swiperight", function(ev) {
+                     var dragSection = $(ev.target).parents('.draggable-section');
+                     var from_user = localStorage['userEmail'];
+                     var to_user = dragSection.data('email');                     
+                     UserInteraction.bump(from_user, to_user, dragSection);
+                 });
+             });
+         }
+         
         </script>
     </body>
 </html>
