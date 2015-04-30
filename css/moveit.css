@@ -61,7 +61,8 @@ body .top-bar {
       color: #bbaa4e; }
 body .leaderboard {
   margin-bottom: 0px;
-  padding-left: 0px; }
+  padding-left: 0px;
+  padding-right: 10px; }
   body .leaderboard .row {
     margin-left: -0.15em; }
   body .leaderboard .collection {
@@ -74,14 +75,15 @@ body .leaderboard {
         color: black; }
       body .leaderboard .collection a:focus {
         color: black; }
-    body .leaderboard .collection .indicator.user-active {
+    body .leaderboard .collection .indicator {
       border-left: 5px;
-      border-left-style: solid;
-      border-left-color: #43ca01; }
-    body .leaderboard .collection .indicator.user-inactive {
-      border-left: 5px;
-      border-left-style: solid;
-      border-left-color: #fdc300; }
+      border-left-style: none; }
+      body .leaderboard .collection .indicator.active-user {
+        border-left-style: solid;
+        border-left-color: #43ca01; }
+      body .leaderboard .collection .indicator.inactive-user {
+        border-left-style: solid;
+        border-left-color: #fdc300; }
     body .leaderboard .collection .highlight {
       background-color: #f9f4e0; }
     body .leaderboard .collection .collection-item {

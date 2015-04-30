@@ -31,7 +31,7 @@ var UserInteraction =
             from_email_id : from_user_email,
             to_email_id : to_user_email
           };
-
+          console.log("bump");
           drag_section.animate({
             left: '+=400px'
           }, 250);
@@ -53,11 +53,34 @@ var UserInteraction =
             error: function() {
               alert("failed");
             },
-            timeout: 30000
+            timeout: 300
           });
         },
 
         nudge: function(from_user_email, to_user_email){
+          var data = {
+            from_email_id : from_user_email,
+            to_email_id : to_user_email
+          };
 
+          drag_section.animate({
+            left: '+=400px'
+          }, 250);
+          console.log("nudge");
+          drag_section.siblings('.interaction-message.nudge').removeClass('hidden');
+          drag_section.hide();
+          $.ajax({
+            dataType: 'json',
+            url: settings.getSetting("apiUrl") + 'user/nudge',
+            type: 'POST',
+            data: data,
+            success: function(data, textStatus, jqXHR) {
+              
+            },
+            error: function() {
+              alert("failed");
+            },
+            timeout: 300
+          });
         }
       };

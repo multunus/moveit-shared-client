@@ -92,6 +92,7 @@ body {
     .leaderboard{
         margin-bottom: 0px;
         padding-left: 0px;
+        padding-right: 10px;
         .row{
             margin-left: -0.15em;
         }
@@ -111,16 +112,17 @@ body {
             }
 
             .indicator{
-                &.user-active{
-                    border-left: 5px;
+                border-left: 5px;
+                border-left-style: none;
+                &.active-user{
                     border-left-style: solid;
                     border-left-color: $button-color;  
                 }
-                &.user-inactive{
-                    border-left: 5px;
+                &.inactive-user{
                     border-left-style: solid;
-                     border-left-color: $moveit-primary-color;
+                    border-left-color: $moveit-primary-color;
                 }
+                
             }
             
             .highlight{

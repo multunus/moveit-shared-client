@@ -134,7 +134,7 @@
                 <li class="collection-item row hidden interaction-message nudge">
                     Nudging
                 </li>
-                <li class="collection-item avatar row <%= css_class %> draggable-section indicator user-inactive" data-email="<%= email %>">
+                <li class="collection-item avatar row <%= css_class %> draggable-section indicator <%= activity_status %>" data-email="<%= email %>" data-activity="<%= activity_status %>">
                     <a href="user_profile.html?email=<%= email %>">
                         <span class=" col s3"><img src="<%= gravatar %>" alt="" class="circle"></span>
                         <span class="item-content">
@@ -189,9 +189,9 @@
          }
 
          function fillUserDetails(data){
-             
              var title_text = '';
              var css_class = '';
+             var activity_status = "";
              _.each(data.leaderboard, function(userDetails, index){
                  if(userDetails.email === localStorage["userEmail"]){
                      title_text = 'YOU';
@@ -204,10 +204,12 @@
                      title_text = userDetails.name;
                      css_class = '';
                  }
-
+                 console.log(userDetails.activity_status);
+                 
                  var userTemplate = $("#user-details-template").html();
                  var templateData = {
                      "css_class": css_class,
+                     "activity_status": userDetails.activity_status + '-user',
                      "index": index + 1,
                      "gravatar" : userDetails.gravatar,
                      "title_text" : title_text,
@@ -248,7 +250,6 @@
                      $('.total-amount > .value').html(Globalize.format(window.total_amount));
                      $('.goal-section > .goal').text(Globalize.format(data.monthly_goal));
                      Materialize.showStaggeredList('.collection');
-                     setupSwipeGesture();
                  },
                  error: function() {
                      $(".loading-throbber").hide();
@@ -257,22 +258,6 @@
                  timeout: 300000
              });
          });
-
-         function setupSwipeGesture(){
-             var options = {
-                 dragLockToAxis: true,
-                 dragBlockHorizontal: true
-             }; 
-             
-             $('.draggable-section').each(function(index, element){
-                 Hammer(element).on("swiperight", function(ev) {
-                     var dragSection = $(ev.target).parents('.draggable-section');
-                     var from_user = localStorage['userEmail'];
-                     var to_user = dragSection.data('email');                     
-                     UserInteraction.bump(from_user, to_user, dragSection);
-                 });
-             });
-         }
          
         </script>
     </body>
