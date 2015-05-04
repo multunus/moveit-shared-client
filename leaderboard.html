@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <link rel="stylesheet" href="css/materialize.min.css">
         <link rel="stylesheet" href="css/moveit.css">
         <!--Let browser know website is optimized for mobile-->
@@ -17,14 +16,14 @@
             <div class="nav-wrapper">
                 <a href="#" data-activates="mobile-demo" class="button-collapse burger-menu"><i class="mdi-navigation-menu"><span>Leaderboard</span></i></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="login.html">Profile</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="index.html">Add Entry</a></li>
                     <li><a href="monthly_summary.html">Monthly Summary</a></li>
                     <li class="active"><a href="leaderboard.html">Leaderboard</a></li>
                     <li><a href="settings.html">Settings</a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
-                    <li><a href="login.html">Profile</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="index.html">Add Entry</a></li>
                     <li><a href="monthly_summary.html">Monthly Summary</a></li>
                     <li class="active"><a href="leaderboard.html">Leaderboard</a></li>
@@ -178,6 +177,7 @@
                  $(".test-mode").removeClass("hidden");
              }
          };
+         
          function showModalFor(user, lastContribution) {
              var modalTemplate = $("#modal-template").html();
              var template = _.template(modalTemplate);
@@ -258,7 +258,6 @@
                  timeout: 300000
              });
          });
-         
         </script>
     </body>
 </html>

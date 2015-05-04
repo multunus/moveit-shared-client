@@ -89,6 +89,34 @@ body {
             }
         }
     }
+    #timeline{
+        &.collection{
+            border-top:none;
+        }
+        .collection-item{
+            a{
+                cursor:pointer;
+                display: inline-block;
+                margin-right: 10px;
+                .circle{
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            .description{
+                display: inline-block;
+                vertical-align: middle;
+                .content{
+                    font-size: 18px;
+                }
+                .time-ago{
+                }
+                .off-white{
+                    color: rgba(183, 183, 183, 1);
+                }
+            }
+        }
+    }
     .leaderboard{
         margin-bottom: 0px;
         padding-left: 0px;
