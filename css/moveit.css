@@ -81,8 +81,20 @@ body .leaderboard {
   padding-right: 10px; }
   body .leaderboard .row {
     margin-left: -0.15em; }
+    body .leaderboard .row.interaction-message {
+      color: white;
+      font-size: 25px;
+      height: 84px; }
+      body .leaderboard .row.interaction-message span {
+        vertical-align: sub;
+        vertical-align: -webkit-baseline-middle; }
+    body .leaderboard .row.bump {
+      background-color: #43ca01; }
+    body .leaderboard .row.nudge {
+      background-color: #fdc300; }
   body .leaderboard .collection {
-    padding-left: 4px; }
+    padding-left: 4px;
+    margin-top: 0px; }
     body .leaderboard .collection a {
       color: black; }
       body .leaderboard .collection a:visited {

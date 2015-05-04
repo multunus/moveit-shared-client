@@ -1,6 +1,6 @@
 $moveit-primary-color: rgb(253, 195, 0);
 $moveit-secondary-color: rgb(254, 230, 108);
-$button-color: rgb(67, 202, 1);
+$green: rgb(67, 202, 1);
 $disabled-text: rgb(188, 188, 188);
 
 
@@ -123,9 +123,25 @@ body {
         padding-right: 10px;
         .row{
             margin-left: -0.15em;
+            &.interaction-message{
+                color: white;
+                font-size: 25px;
+                height: 84px;
+                span{
+                    vertical-align: sub;
+                    vertical-align: -webkit-baseline-middle;
+                }
+            }
+            &.bump{
+                background-color:  $green;  
+            }
+            &.nudge{
+                background-color:  $moveit-primary-color;  
+            }
         }
         .collection{
             padding-left: 4px;
+            margin-top: 0px;
             a{
                 color: rgba(0, 0, 0, 1);
                 &:visited{
@@ -144,7 +160,7 @@ body {
                 border-left-style: none;
                 &.active-user{
                     border-left-style: solid;
-                    border-left-color: $button-color;  
+                    border-left-color: $green;  
                 }
                 &.inactive-user{
                     border-left-style: solid;
@@ -303,11 +319,11 @@ body {
 }
 
 .btn-primary{
-    background-color: $button-color;
+    background-color: $green;
     color: white;
     height: 48px;
     &:hover {
-        background-color: $button-color;
+        background-color: $green;
     }
 }
 

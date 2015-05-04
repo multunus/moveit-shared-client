@@ -23,64 +23,41 @@ var getParameterByName = function(name, location) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 };
 
+var UserInteraction = {
+  action: function(fromEmail, toEmail, draggable, action, name){
+    draggable.animate({
+      left: '+=400px'
+    }, 250);
 
-var UserInteraction =
-      {
-        bump: function(from_user_email, to_user_email, drag_section){
-          var data = {
-            from_email_id : from_user_email,
-            to_email_id : to_user_email
-          };
-          console.log("bump");
-          drag_section.animate({
-            left: '+=400px'
-          }, 250);
-          
-          drag_section.siblings('.interaction-message.bump').removeClass('hidden');
-          drag_section.hide();
-          $.ajax({
-            dataType: 'json',
-            url: settings.getSetting("apiUrl") + 'user/bump',
-            type: 'POST',
-            data: data,
-            success: function(data, textStatus, jqXHR) {
-              drag_section.show();
-              drag_section.animate({
-                left: '-=400px'
-              }, 250);
-              drag_section.siblings('.interaction-message.bump').addClass('hidden');
-            },
-            error: function() {
-              alert("failed");
-            },
-            timeout: 300
-          });
-        },
+    draggable.siblings('.interaction-message.' + action).removeClass('hidden');
+    draggable.hide();
 
-        nudge: function(from_user_email, to_user_email){
-          var data = {
-            from_email_id : from_user_email,
-            to_email_id : to_user_email
-          };
+    var data = {
+      from_email_id : fromEmail,
+      to_email_id : toEmail
+    };
 
-          drag_section.animate({
-            left: '+=400px'
-          }, 250);
-          console.log("nudge");
-          drag_section.siblings('.interaction-message.nudge').removeClass('hidden');
-          drag_section.hide();
-          $.ajax({
-            dataType: 'json',
-            url: settings.getSetting("apiUrl") + 'user/nudge',
-            type: 'POST',
-            data: data,
-            success: function(data, textStatus, jqXHR) {
-              
-            },
-            error: function() {
-              alert("failed");
-            },
-            timeout: 300
-          });
-        }
-      };
+    $.ajax({
+      dataType: 'json',
+      url: settings.getSetting("userApiUrl") + action,
+      type: 'POST',
+      data: data,
+      success: function(data, textStatus, jqXHR) {
+        console.log(action + "ing....");
+        Materialize.toast("You " + action + "'d " + name, 2000);
+      },
+      error: function() {
+        Materialize.toast("Oops, something went wrong", 2000);
+      }
+    });
+
+    setTimeout(function(){
+      draggable.show();
+      draggable.animate({
+        left: '-=400px'
+      }, 250);
+      draggable.siblings('.interaction-message.' + action).addClass('hidden');
+    }, 500);
+  }
+};
+

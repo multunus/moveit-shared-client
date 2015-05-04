@@ -128,12 +128,12 @@
         <script type="text/template" id="user-details-template">
             <div class="drag-items">
                 <li class="collection-item row hidden interaction-message bump">
-                    Bumping
+                    <span>Bumping <%= title_text %></span>
                 </li>
                 <li class="collection-item row hidden interaction-message nudge">
-                    Nudging
+                    <span>Nudging <%= title_text %></span>
                 </li>
-                <li class="collection-item avatar row <%= css_class %> draggable-section indicator <%= activity_status %>" data-email="<%= email %>" data-activity="<%= activity_status %>">
+                <li class="collection-item avatar row <%= css_class %> draggable-section indicator <%= activity_status %>" data-email="<%= email %>" data-name="<%= title_text %>" data-activity="<%= activity_status %>">
                     <a href="user_profile.html?email=<%= email %>">
                         <span class=" col s3"><img src="<%= gravatar %>" alt="" class="circle"></span>
                         <span class="item-content">
@@ -250,6 +250,7 @@
                      $('.total-amount > .value').html(Globalize.format(window.total_amount));
                      $('.goal-section > .goal').text(Globalize.format(data.monthly_goal));
                      Materialize.showStaggeredList('.collection');
+                     bindSwipe();
                  },
                  error: function() {
                      $(".loading-throbber").hide();
@@ -258,6 +259,17 @@
                  timeout: 300000
              });
          });
+
+         function bindSwipe(){
+             var from_user_email = localStorage.getItem("userEmail");
+             $('.draggable-section').not(".not_so_active-user").hammer().bind('swiperight', function(el){
+                 console.log("swipe right");
+                 var to_user_email = $(this).data("email");
+                 var activity = $(this).data("activity") === "active-user" ? "bump" : "nudge"
+                 var name = $(this).data("name");
+                 UserInteraction.action(from_user_email, to_user_email, $(this), activity, name);
+             })
+         }
         </script>
     </body>
 </html>
