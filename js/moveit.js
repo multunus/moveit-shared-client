@@ -27,6 +27,8 @@ var UserInteraction = {
   action: function(fromEmail, toEmail, draggable, action, name){
 
     if(fromEmail != toEmail && action != ''){
+      console.log(fromEmail);
+      console.log(toEmail);
       draggable.animate({
         left: '+=400px'
       }, 250);
