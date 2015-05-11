@@ -190,12 +190,15 @@ body {
                 }
 
                 .action{
-                    &.bump, &.nudge, &.none {
+                    &.bump, &.nudge {
                         position: absolute;
                         left: 0px;
                         top: 0px;
                         width: 9px;
                         height: 100%
+                    }
+                    &.none{
+                        display: none;
                     }
                 }
 
@@ -236,6 +239,7 @@ body {
                     }
                     .amount-section{
                         display: inline-block;
+                        white-space: nowrap;
                         .amount{
                             color: rgb(117, 117, 117);
                             font-size: x-large;

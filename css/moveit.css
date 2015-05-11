@@ -120,12 +120,14 @@ body .leaderboard {
         border: 3px solid #fdc300; }
       body .leaderboard .collection .indicator.blank .profile-pic {
         border: none; }
-      body .leaderboard .collection .indicator .action.bump, body .leaderboard .collection .indicator .action.nudge, body .leaderboard .collection .indicator .action.none {
+      body .leaderboard .collection .indicator .action.bump, body .leaderboard .collection .indicator .action.nudge {
         position: absolute;
         left: 0px;
         top: 0px;
         width: 9px;
         height: 100%; }
+      body .leaderboard .collection .indicator .action.none {
+        display: none; }
       body .leaderboard .collection .indicator[data-name=YOU] .action {
         display: none; }
     body .leaderboard .collection .highlight {
@@ -149,7 +151,8 @@ body .leaderboard {
           font-size: 20px !important;
           color: #bcbcbc; }
         body .leaderboard .collection .collection-item .item-content .amount-section {
-          display: inline-block; }
+          display: inline-block;
+          white-space: nowrap; }
           body .leaderboard .collection .collection-item .item-content .amount-section .amount {
             color: #757575;
             font-size: x-large; }
