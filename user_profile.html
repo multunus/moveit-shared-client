@@ -14,7 +14,7 @@
         </div>
         <nav>
             <div class="nav-wrapper">
-                <a href="javascript:window.history.back();"><i class="medium mdi-hardware-keyboard-arrow-left"><span class="user_name"></span></i></a>
+                <a href="leaderboard.html" class="user-leaderboard-link"><i class="medium mdi-hardware-keyboard-arrow-left"><span class="user_name"></span></i></a>
             </div>
         </nav>
         <script type="text/html" id="user-profile-template">
@@ -151,11 +151,10 @@
              window.totalContributionAmount = 0;
              window.totalWorkoutDuration = 0;
              $(".button-collapse").sideNav();
-             
              var userEmail = getParameterByName("email", location);
              var startDate = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
              var endDate = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
-             
+
              var data = {
                  email: userEmail,
                  start_date: startDate,
