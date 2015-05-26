@@ -83,9 +83,14 @@ body #timeline .collection-item {
     vertical-align: middle; }
     body #timeline .collection-item .description .content {
       font-size: 18px; }
+      body #timeline .collection-item .description .content .subject {
+        color: #191919; }
+      body #timeline .collection-item .description .content .action {
+        color: #797979; }
+      body #timeline .collection-item .description .content .object {
+        color: #BDBDBD; }
     body #timeline .collection-item .description .time-ago img {
       width: 22px;
-      height: 17px;
       margin-right: 6px; }
     body #timeline .collection-item .description .off-white {
       color: #b7b7b7; }

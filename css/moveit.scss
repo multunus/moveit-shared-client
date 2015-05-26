@@ -122,11 +122,19 @@ body {
                 vertical-align: middle;
                 .content{
                     font-size: 18px;
+                    .subject {
+                        color: #191919;
+                    }
+                    .action {
+                        color: #797979;
+                    }
+                    .object {
+                        color: #BDBDBD;
+                    }
                 }
                 .time-ago{
                     img{
                         width: 22px;
-                        height: 17px;
                         margin-right: 6px;
                     }
                 }
