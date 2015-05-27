@@ -65,6 +65,7 @@ body #timeline.collection {
 body #timeline .collection-item {
   width: 92%;
   margin: 5px 4% 10px 4%;
+  padding: 10px;
   box-shadow: 0px 0px 1px #c8c8c8;
   border-bottom: 1px solid #e0e0e0 !important; }
   body #timeline .collection-item.notification-read.false {
