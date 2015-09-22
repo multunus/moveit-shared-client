@@ -79,6 +79,7 @@ body .top-bar {
       font-size: 13px;
       color: #bbaa4e; }
 body .activity-collection.collection {
+  padding: 8px 0;
   border-top: none;
   border-bottom: none; }
 body .activity-collection .collection-item {
@@ -356,7 +357,7 @@ a:hover, a:focus {
   padding-top: 10px; }
 
 .workout-entry-form {
-  padding: 15px 0; }
+  padding: 8px 0; }
   .workout-entry-form textarea {
     padding-bottom: 10px; }
   .workout-entry-form .file-field.col .btn {

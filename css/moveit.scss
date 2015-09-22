@@ -114,6 +114,7 @@ body {
     }
     .activity-collection {
         &.collection{
+            padding: 8px 0;
             border-top:none;
             border-bottom: none;
         }
@@ -509,7 +510,7 @@ a {
 }
 
 .workout-entry-form {
-    padding: 15px 0;
+    padding: 8px 0;
 
     textarea {
         padding-bottom: 10px;
